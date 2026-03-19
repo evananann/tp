@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -196,12 +197,21 @@ public class AddressBookParserTest {
     }
 
     /**
+     * Verifies parsing of {@code alias} commands.
+     */
+    @Test
+    public void parseCommand_alias() {
+        assertThrows(ParseException.class, AliasCommand.MESSAGE_USAGE, () -> parser.parseCommand("alias list extra"));
+    }
+
+    /**
      * Verifies that empty input produces a parse exception.
      */
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class,
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () ->
+                parser.parseCommand(""));
     }
 
     /**
