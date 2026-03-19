@@ -1,10 +1,7 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_PERSONS;
-
 import java.nio.file.Path;
+import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_PERSONS;
 import seedu.address.model.person.Person;
 
 /**

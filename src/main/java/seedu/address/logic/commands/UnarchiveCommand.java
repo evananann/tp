@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -26,7 +25,7 @@ public class UnarchiveCommand extends Command {
     private final Index targetIndex;
 
     public UnarchiveCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = requireNonNull(targetIndex, "targetIndex cannot be null");
     }
 
     @Override
@@ -43,9 +42,7 @@ public class UnarchiveCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_ALREADY_ACTIVE);
         }
 
-        Person unarchivedPerson = new Person(personToUnarchive.getName(), personToUnarchive.getPhone(),
-                personToUnarchive.getEmail(), personToUnarchive.getAddress(), personToUnarchive.getRemark(),
-                false, personToUnarchive.getTags());
+        Person unarchivedPerson = personToUnarchive.withArchived(false);
 
         model.setPerson(personToUnarchive, unarchivedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ACTIVE_PERSONS);

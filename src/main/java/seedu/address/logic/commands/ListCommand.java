@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_PERSONS;
 
 import seedu.address.model.Model;
+import static seedu.address.model.Model.PREDICATE_SHOW_ACTIVE_PERSONS;
 
 /**
  * Lists all persons in the address book to the user.
@@ -26,6 +27,11 @@ public class ListCommand extends Command {
         this.showArchived = showArchived;
     }
 
+    /** Returns whether this command lists archived contacts. */
+    public boolean isShowArchived() {
+        return showArchived;
+    }
+
 
     @Override
     public CommandResult execute(Model model) {
@@ -37,5 +43,24 @@ public class ListCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ACTIVE_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ListCommand)) {
+            return false;
+        }
+
+        ListCommand otherCommand = (ListCommand) other;
+        return showArchived == otherCommand.showArchived;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(showArchived);
     }
 }

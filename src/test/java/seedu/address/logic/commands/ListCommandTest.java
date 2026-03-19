@@ -1,18 +1,18 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -42,15 +42,10 @@ public class ListCommandTest {
     @Test
     public void execute_listArchived_showsOnlyArchivedContacts() {
         Person personToArchive = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        model.setPerson(personToArchive,
-                new seedu.address.model.person.Person(personToArchive.getName(), personToArchive.getPhone(),
-                        personToArchive.getEmail(), personToArchive.getAddress(), personToArchive.getRemark(),
-                        true, personToArchive.getTags()));
+        Person archivedPerson = new PersonBuilder(personToArchive).withArchived(true).build();
+        model.setPerson(personToArchive, archivedPerson);
 
-        expectedModel.setPerson(personToArchive,
-                new seedu.address.model.person.Person(personToArchive.getName(), personToArchive.getPhone(),
-                        personToArchive.getEmail(), personToArchive.getAddress(), personToArchive.getRemark(),
-                        true, personToArchive.getTags()));
+        expectedModel.setPerson(personToArchive, archivedPerson);
         expectedModel.updateFilteredPersonList(seedu.address.model.person.Person::isArchived);
 
         assertCommandSuccess(new ListCommand(true), model, ListCommand.MESSAGE_ARCHIVED_SUCCESS, expectedModel);

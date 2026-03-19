@@ -1,12 +1,11 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -74,6 +73,13 @@ public class Person {
     }
 
     /**
+     * Returns a copy of this person with the given archived state.
+     */
+    public Person withArchived(boolean archived) {
+        return new Person(name, phone, email, address, remark, archived, tags);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -115,7 +121,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && remark.equals(otherPerson.remark)
-            && isArchived == otherPerson.isArchived
+                && isArchived == otherPerson.isArchived
                 && tags.equals(otherPerson.tags);
     }
 

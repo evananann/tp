@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -26,7 +25,7 @@ public class ArchiveCommand extends Command {
     private final Index targetIndex;
 
     public ArchiveCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+        this.targetIndex = requireNonNull(targetIndex, "targetIndex cannot be null");
     }
 
     @Override
@@ -43,9 +42,7 @@ public class ArchiveCommand extends Command {
             throw new CommandException(MESSAGE_PERSON_ALREADY_ARCHIVED);
         }
 
-        Person archivedPerson = new Person(personToArchive.getName(), personToArchive.getPhone(),
-                personToArchive.getEmail(), personToArchive.getAddress(), personToArchive.getRemark(),
-                true, personToArchive.getTags());
+        Person archivedPerson = personToArchive.withArchived(true);
 
         model.setPerson(personToArchive, archivedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ACTIVE_PERSONS);
