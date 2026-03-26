@@ -32,6 +32,11 @@ public class UiManager implements Ui {
         this.logic = logic;
     }
 
+    /**
+     * Starts and shows the primary UI window.
+     *
+     * @param primaryStage primary stage provided by JavaFX
+     */
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
@@ -50,6 +55,12 @@ public class UiManager implements Ui {
         }
     }
 
+    /**
+     * Loads an image resource from the application classpath.
+     *
+     * @param imagePath path to image resource
+     * @return loaded image
+     */
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }

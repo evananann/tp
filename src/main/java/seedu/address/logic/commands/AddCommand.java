@@ -48,6 +48,13 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Adds the target person into the model.
+     *
+     * @param model model that stores the address book data
+     * @return result message containing the added contact and total count
+     * @throws CommandException if the person already exists in the address book
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -61,6 +68,12 @@ public class AddCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), totalContacts));
     }
 
+    /**
+     * Returns whether this command and another command add the same person.
+     *
+     * @param other object to compare against
+     * @return true if both commands add an equivalent person
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -76,6 +89,11 @@ public class AddCommand extends Command {
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
+    /**
+     * Returns a string representation of this command for debugging.
+     *
+     * @return string representation containing the person to add
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

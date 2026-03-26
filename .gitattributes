@@ -1,1 +1,7 @@
+# Auto normalize line endings to LF
+* text=auto eol=lf
+
+# Binary files should not have line-ending normalization
 *.pdf binary
+*.png binary
+*.jar binary
