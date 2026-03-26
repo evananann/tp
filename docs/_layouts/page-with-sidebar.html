@@ -21,8 +21,10 @@ layout: default
       class="sidebar-toc-toggle"
       id="sidebar-toc-toggle"
       type="button"
+      aria-hidden="true"
       aria-expanded="false"
       aria-controls="toc-list"
+      tabindex="-1"
     >
       <span class="sidebar-toc-title">On this page</span>
       <span class="sidebar-toc-toggle-icon" aria-hidden="true"></span>
@@ -49,13 +51,29 @@ layout: default
     var tocBackdrop = document.getElementById('sidebar-toc-backdrop');
     var desktopQuery = window.matchMedia('(min-width: 1280px)');
 
+    function syncTocToggleState(isExpanded) {
+      var isFunctional = !desktopQuery.matches && isExpanded;
+
+      tocToggle.hidden = desktopQuery.matches;
+      tocToggle.setAttribute('aria-expanded', String(isFunctional));
+
+      if (isFunctional) {
+        tocToggle.removeAttribute('aria-hidden');
+        tocToggle.removeAttribute('tabindex');
+        return;
+      }
+
+      tocToggle.setAttribute('aria-hidden', 'true');
+      tocToggle.setAttribute('tabindex', '-1');
+    }
+
     function setTocExpanded(isExpanded) {
       toc.setAttribute('data-mobile-open', String(isExpanded));
-      tocToggle.setAttribute('aria-expanded', String(isExpanded));
       tocLauncher.setAttribute('aria-expanded', String(isExpanded));
       tocList.hidden = !isExpanded;
       tocBackdrop.hidden = !isExpanded;
       document.body.classList.toggle('sidebar-toc-open', isExpanded && !desktopQuery.matches);
+      syncTocToggleState(isExpanded);
     }
 
     function syncTocMode(event) {
@@ -76,19 +94,11 @@ layout: default
     });
 
     tocLauncher.addEventListener('click', function () {
-      if (desktopQuery.matches) {
-        return;
-      }
-
       setTocExpanded(true);
     });
 
     tocToggle.addEventListener('click', function () {
-      if (desktopQuery.matches) {
-        return;
-      }
-
-      setTocExpanded(false);
+      setTocExpanded(desktopQuery.matches);
     });
 
     tocBackdrop.addEventListener('click', function () {

@@ -14,7 +14,7 @@ Don't worry if some of this feels unfamiliar at first. Every technical term is e
 You've got this!
 
 <div markdown="block" class="alert alert-info">
-💡 <strong>Navigation tip:</strong> See the sidebar on the left? It lists every section of this guide. Click any item to jump straight there.
+💡 <strong>Navigation tip:</strong> Use the sidebar on wide screens, or tap <strong>Contents</strong> on smaller screens to open the table of contents and jump to any section.
 </div>
 
 ## Who This Guide Is For
@@ -175,7 +175,7 @@ PingBook needs **Java 17** (a specific version of the Java platform) to run. Let
 
 1. In your terminal, type the following exactly and press **Enter**:
 
-   ```
+   ```shell
    java -version
    ```
 
@@ -194,7 +194,7 @@ Once installed, close and reopen your terminal, then run `java -version` again t
 
 ### Step 3: Download PingBook
 
-1. Go to the [PingBook releases page](https://github.com/se-edu/addressbook-level3/releases) in your web browser.
+1. Go to the [PingBook releases page](https://github.com/AY2526S2-CS2103T-T17-2/tp/releases) in your web browser.
 2. Under the latest release, click `pingbook.jar` to download it. This is the JAR file (the runnable application file) that contains PingBook.
 3. Create a new folder somewhere easy to remember, for example:
    - **Windows:** `C:\Users\yourname\PingBook`
@@ -211,7 +211,7 @@ Now you need to tell your terminal to "go to" the folder where `pingbook.jar` li
 
 ##### On Windows
 
-```
+```shell
 cd C:\Users\yourname\PingBook
 ```
 
@@ -219,7 +219,7 @@ Replace `yourname` with your actual Windows username. Press **Enter**.
 
 ##### On macOS/Linux
 
-```
+```shell
 cd ~/Documents/PingBook
 ```
 
@@ -243,7 +243,7 @@ You should see `pingbook.jar` in the list.
 
 With your terminal open and pointing to the PingBook folder, type the following and press **Enter**:
 
-```
+```shell
 java -jar pingbook.jar
 ```
 
@@ -251,7 +251,7 @@ This tells Java to run the `pingbook.jar` file.
 
 <div markdown="block" class="alert alert-success result-block">
 <span class="example-result-label">✅ <strong>Expected result:</strong></span>
-The PingBook window opens with a set of sample contacts already loaded. You should see a contact list on the right side and a text box at the top for typing commands.
+The PingBook window opens with a set of sample contacts already loaded. You should see a text box at the top, a result display directly below it, and the contact list underneath.
 </div>
 
 <div markdown="block" class="alert alert-warning">
@@ -276,7 +276,7 @@ The PingBook window (the user interface, or UI, meaning all the visual elements 
 | **Menu bar** | The row of menus (File, Help) at the very top of the window. |
 | **Command box** | The text field where you type commands. Click here first before typing. |
 | **Result display** | The panel below the command box that shows the outcome of each command, including success messages and error messages. |
-| **Contact list** | The panel on the right that shows all currently displayed contacts. |
+| **Contact list** | The panel below the result display that shows all currently displayed contacts. |
 
 ### Your First Command
 
@@ -285,7 +285,7 @@ Let's add your first contact to make sure everything is working.
 1. Click inside the **Command box** (the text field near the top of the window).
 2. Type the following command exactly as shown, then press **Enter**:
 
-   ```
+   ```text
    add n/Alex Tan p/91234567 e/alex@email.com
    ```
 
@@ -293,7 +293,7 @@ Let's add your first contact to make sure everything is working.
 
 <div markdown="block" class="alert alert-success example-block">
 <span class="example-result-label">✅ <strong>Expected result:</strong></span>
-<pre class="example-result">The result display shows New contact added: Alex Tan; ... and Alex Tan appears in the contact list on the right.</pre>
+<pre class="example-result">The result display shows New contact added: Alex Tan; ... and Alex Tan appears in the contact list below the result display.</pre>
 </div>
 
 Congratulations! You've just used your first PingBook command!

@@ -338,6 +338,7 @@ body.sidebar-toc-open {
 
 pre {
   white-space: pre-wrap;
+
   word-wrap: break-word; /* For older IE support */
   overflow-wrap: break-word; /* Standard property */
   margin-bottom: 0;
