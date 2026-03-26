@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -95,6 +97,48 @@ public class StorageManager implements Storage {
     public void saveAliases(Map<String, String> aliases) throws IOException {
         logger.fine("Attempting to save aliases to file");
         aliasStorage.saveAliases(aliases);
+    }
+
+    // ================ Combined save ==============================
+
+    /**
+     * Saves both the address book and alias map, restoring the address book from a temporary backup
+     * if the alias save fails, so the two files remain in a mutually consistent state.
+     */
+    @Override
+    public void saveAll(ReadOnlyAddressBook addressBook, Map<String, String> aliases) throws IOException {
+        Path abPath = addressBookStorage.getAddressBookFilePath();
+        Path backupPath = abPath.resolveSibling(abPath.getFileName().toString() + ".bak");
+        boolean hadExistingFile = Files.exists(abPath);
+        if (hadExistingFile) {
+            Files.copy(abPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+        }
+        try {
+            saveAddressBook(addressBook);
+            saveAliases(aliases);
+        } catch (IOException e) {
+            if (hadExistingFile) {
+                try {
+                    Files.move(backupPath, abPath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException restoreEx) {
+                    logger.warning("Could not restore address book backup after partial save: "
+                            + restoreEx.getMessage());
+                }
+            } else {
+                try {
+                    Files.deleteIfExists(abPath);
+                } catch (IOException cleanupEx) {
+                    logger.warning("Could not clean up partial address book write: "
+                            + cleanupEx.getMessage());
+                }
+            }
+            throw e;
+        }
+        try {
+            Files.deleteIfExists(backupPath);
+        } catch (IOException ignore) {
+            logger.fine("Could not delete address book backup after successful save.");
+        }
     }
 
 }
