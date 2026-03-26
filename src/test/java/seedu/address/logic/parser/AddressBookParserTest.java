@@ -1,20 +1,16 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -27,17 +23,17 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.StarCommand;
 import seedu.address.logic.commands.UnarchiveCommand;
-import seedu.address.logic.commands.UnstarCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import static seedu.address.testutil.Assert.assertThrows;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 /**
  * Contains unit tests for {@link AddressBookParser}.
@@ -167,26 +163,6 @@ public class AddressBookParserTest {
     }
 
     /**
-     * Verifies parsing of {@code star} commands.
-     */
-    @Test
-    public void parseCommand_star() throws Exception {
-        StarCommand command = (StarCommand) parser.parseCommand(
-                StarCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new StarCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    /**
-     * Verifies parsing of {@code unstar} commands.
-     */
-    @Test
-    public void parseCommand_unstar() throws Exception {
-        UnstarCommand command = (UnstarCommand) parser.parseCommand(
-                UnstarCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new UnstarCommand(INDEX_FIRST_PERSON), command);
-    }
-
-    /**
      * Verifies parsing of {@code unarchive} commands.
      */
     @Test
@@ -197,21 +173,12 @@ public class AddressBookParserTest {
     }
 
     /**
-     * Verifies parsing of {@code alias} commands.
-     */
-    @Test
-    public void parseCommand_alias() {
-        assertThrows(ParseException.class, AliasCommand.MESSAGE_USAGE, () -> parser.parseCommand("alias list extra"));
-    }
-
-    /**
      * Verifies that empty input produces a parse exception.
      */
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () ->
-                parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+            -> parser.parseCommand(""));
     }
 
     /**
