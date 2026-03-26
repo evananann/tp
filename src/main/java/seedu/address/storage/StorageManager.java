@@ -113,6 +113,9 @@ public class StorageManager implements Storage {
      */
     @Override
     public void saveAll(ReadOnlyAddressBook addressBook, Map<String, String> aliases) throws IOException {
+        Objects.requireNonNull(addressBook, "addressBook");
+        Objects.requireNonNull(aliases, "aliases");
+
         Path abPath = addressBookStorage.getAddressBookFilePath();
         Path abBackupPath = abPath.resolveSibling(abPath.getFileName().toString() + ".bak");
         boolean hadExistingAbFile = Files.exists(abPath);

@@ -348,6 +348,47 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void saveAll_nullAddressBook_throwsBeforeFileOperations() throws Exception {
+        storageManager.saveAddressBook(new AddressBook());
+        Map<String, String> aliases = new HashMap<>();
+        aliases.put("ls", "list");
+        storageManager.saveAliases(aliases);
+
+        Path abPath = getTempFilePath("ab");
+        Path aliasPath = getTempFilePath("aliases");
+
+        assertThrows(NullPointerException.class, () -> storageManager.saveAll(null, aliases));
+
+        assertFalse(Files.exists(abPath.resolveSibling(abPath.getFileName() + ".bak")));
+        assertFalse(Files.exists(aliasPath.resolveSibling(aliasPath.getFileName() + ".bak")));
+        assertEquals(new AddressBook(), new AddressBook(storageManager.readAddressBook()
+                .orElseThrow(() -> new AssertionError("AddressBook file should remain unchanged"))));
+        assertEquals(aliases, storageManager.readAliases()
+                .orElseThrow(() -> new AssertionError("Aliases file should remain unchanged")));
+    }
+
+    @Test
+    public void saveAll_nullAliases_throwsBeforeFileOperations() throws Exception {
+        AddressBook book = getTypicalAddressBook();
+        Map<String, String> existingAliases = new HashMap<>();
+        existingAliases.put("ls", "list");
+        storageManager.saveAddressBook(book);
+        storageManager.saveAliases(existingAliases);
+
+        Path abPath = getTempFilePath("ab");
+        Path aliasPath = getTempFilePath("aliases");
+
+        assertThrows(NullPointerException.class, () -> storageManager.saveAll(book, null));
+
+        assertFalse(Files.exists(abPath.resolveSibling(abPath.getFileName() + ".bak")));
+        assertFalse(Files.exists(aliasPath.resolveSibling(aliasPath.getFileName() + ".bak")));
+        assertEquals(book, new AddressBook(storageManager.readAddressBook()
+                .orElseThrow(() -> new AssertionError("AddressBook file should remain unchanged"))));
+        assertEquals(existingAliases, storageManager.readAliases()
+                .orElseThrow(() -> new AssertionError("Aliases file should remain unchanged")));
+    }
+
+    @Test
     public void saveAll_aliasesThrowsWithExistingFiles_restoresBoth() throws Exception {
         // Pre-populate both files with original data
         AddressBook originalBook = new AddressBook();
