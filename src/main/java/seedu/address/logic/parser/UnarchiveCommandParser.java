@@ -9,6 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /** Parses index arguments into an UnarchiveCommand. */
 public class UnarchiveCommandParser implements Parser<UnarchiveCommand> {
 
+    /**
+     * Parses input arguments and creates an {@link UnarchiveCommand}.
+     *
+     * @param args raw arguments after the unarchive command word
+     * @return unarchive command targeting the parsed index
+     * @throws ParseException if the input is not a valid single index
+     */
     @Override
     public UnarchiveCommand parse(String args) throws ParseException {
         try {

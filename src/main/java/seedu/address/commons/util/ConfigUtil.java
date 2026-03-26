@@ -8,14 +8,29 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.exceptions.DataLoadingException;
 
 /**
- * A class for accessing the Config File.
+ * Utility methods for reading and writing application {@link Config}.
  */
 public class ConfigUtil {
 
+    /**
+     * Reads a {@link Config} from a JSON file.
+     *
+     * @param configFilePath path to config file
+     * @return optional containing config when the file exists and is valid;
+     *         empty optional when the config file does not exist
+     * @throws DataLoadingException if the file content is invalid
+     */
     public static Optional<Config> readConfig(Path configFilePath) throws DataLoadingException {
         return JsonUtil.readJsonFile(configFilePath, Config.class);
     }
 
+    /**
+     * Writes a {@link Config} to a JSON file.
+     *
+     * @param config config to save
+     * @param configFilePath destination config file path
+     * @throws IOException if writing fails
+     */
     public static void saveConfig(Config config, Path configFilePath) throws IOException {
         JsonUtil.saveJsonFile(config, configFilePath);
     }

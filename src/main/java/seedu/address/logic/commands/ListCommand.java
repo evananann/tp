@@ -20,10 +20,18 @@ public class ListCommand extends Command {
 
     private final boolean showArchived;
 
+    /**
+     * Creates a command that lists active contacts.
+     */
     public ListCommand() {
         this(false);
     }
 
+    /**
+     * Creates a list command for either archived or active contacts.
+     *
+     * @param showArchived when true, list archived contacts; otherwise list active contacts
+     */
     public ListCommand(boolean showArchived) {
         this.showArchived = showArchived;
     }
@@ -34,6 +42,12 @@ public class ListCommand extends Command {
     }
 
 
+    /**
+     * Updates the filtered list according to the selected contact state.
+     *
+     * @param model model that owns the filtered person list
+     * @return result message indicating which list is shown
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -46,6 +60,12 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Returns whether this command and another command have the same target mode.
+     *
+     * @param other object to compare against
+     * @return true if both commands list the same category of contacts
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,6 +80,11 @@ public class ListCommand extends Command {
         return showArchived == otherCommand.showArchived;
     }
 
+    /**
+     * Returns a hash code consistent with {@link #equals(Object)}.
+     *
+     * @return hash code for this command
+     */
     @Override
     public int hashCode() {
         return Objects.hash(showArchived);

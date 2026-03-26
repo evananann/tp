@@ -9,6 +9,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /** Parses index arguments into an ArchiveCommand. */
 public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
+    /**
+     * Parses input arguments and creates an {@link ArchiveCommand}.
+     *
+     * @param args raw arguments after the archive command word
+     * @return archive command targeting the parsed index
+     * @throws ParseException if the input is not a valid single index
+     */
     @Override
     public ArchiveCommand parse(String args) throws ParseException {
         try {

@@ -19,10 +19,20 @@ public class AppParameters {
 
     private Path configPath;
 
+    /**
+     * Returns the optional config file path supplied via command line.
+     *
+     * @return config file path, or null if not provided
+     */
     public Path getConfigPath() {
         return configPath;
     }
 
+    /**
+     * Sets the config file path parsed from command line parameters.
+     *
+     * @param configPath config file path, or null to use default behavior
+     */
     public void setConfigPath(Path configPath) {
         this.configPath = configPath;
     }
@@ -44,6 +54,12 @@ public class AppParameters {
         return appParameters;
     }
 
+    /**
+     * Returns whether this object contains the same parsed parameters as another object.
+     *
+     * @param other object to compare against
+     * @return true if both objects hold equivalent parameter values
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -59,11 +75,21 @@ public class AppParameters {
         return Objects.equals(configPath, otherAppParameters.configPath);
     }
 
+    /**
+     * Returns a hash code consistent with {@link #equals(Object)}.
+     *
+     * @return hash code for this parameter object
+     */
     @Override
     public int hashCode() {
         return Objects.hashCode(configPath);
     }
 
+    /**
+     * Returns a debug-friendly string representation of parsed parameters.
+     *
+     * @return string representation of parsed command-line options
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)

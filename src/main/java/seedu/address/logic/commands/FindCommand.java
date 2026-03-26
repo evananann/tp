@@ -24,10 +24,21 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a find command with the provided name-matching predicate.
+     *
+     * @param predicate predicate used to filter matching persons
+     */
     public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
+    /**
+     * Applies the predicate to show matching active persons.
+     *
+     * @param model model used to update the filtered person list
+     * @return result containing the number of matching persons
+     */
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
@@ -36,6 +47,14 @@ public class FindCommand extends Command {
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
+    /**
+     * Indicates whether another object is equal to this {@code FindCommand}.
+     * This follows the usual {@code equals} contract (reflexive, symmetric,
+     * transitive, consistent, and false for null).
+     *
+     * @param other object to compare against
+     * @return true if {@code other} is a {@code FindCommand} with an equivalent predicate
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -51,6 +70,11 @@ public class FindCommand extends Command {
         return predicate.equals(otherFindCommand.predicate);
     }
 
+    /**
+     * Returns a string representation of this command for debugging.
+     *
+     * @return string representation containing the predicate
+     */
     @Override
     public String toString() {
         return new ToStringBuilder(this)
