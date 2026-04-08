@@ -174,4 +174,9 @@ public class ArgumentTokenizerTest {
         assertFalse(ArgumentTokenizer.isNonDecreasingPositions(Arrays.asList(1, 3, 2, 5)));
     }
 
+    @Test
+    public void isNonDecreasingPositions_twoElementsDecreasing_returnsFalse() {
+        assertFalse(ArgumentTokenizer.isNonDecreasingPositions(Arrays.asList(2, 1)));
+    }
+
 }
