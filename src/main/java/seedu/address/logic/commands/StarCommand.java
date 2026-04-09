@@ -47,7 +47,8 @@ public class StarCommand extends Command {
         }
 
         Person starredPerson = new Person(personToStar.getName(), personToStar.getPhone(), personToStar.getEmail(),
-                personToStar.getAddress(), personToStar.getRemark(), personToStar.getTags(), true);
+                personToStar.getAddress(), personToStar.getRemark(), personToStar.isArchived(),
+                personToStar.getTags(), true);
         model.setPerson(personToStar, starredPerson);
         return new CommandResult(String.format(MESSAGE_STAR_PERSON_SUCCESS, Messages.format(starredPerson)));
     }

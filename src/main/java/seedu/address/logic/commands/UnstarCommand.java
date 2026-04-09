@@ -49,7 +49,7 @@ public class UnstarCommand extends Command {
 
         Person unstarredPerson = new Person(personToUnstar.getName(), personToUnstar.getPhone(),
                 personToUnstar.getEmail(), personToUnstar.getAddress(), personToUnstar.getRemark(),
-                personToUnstar.getTags(), false);
+                personToUnstar.isArchived(), personToUnstar.getTags(), false);
         model.setPerson(personToUnstar, unstarredPerson);
         return new CommandResult(String.format(MESSAGE_UNSTAR_PERSON_SUCCESS, Messages.format(unstarredPerson)));
     }
