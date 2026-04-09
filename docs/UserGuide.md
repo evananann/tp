@@ -332,7 +332,7 @@ Each prefix (`n/`, `p/`, `e/`, etc.) tells PingBook what type of information fol
 
 | Field | Required? | Rules |
 |---|---|---|
-| `n/NAME` | Yes | Letters and digits only (alphanumeric), spaces allowed. |
+| `n/NAME` | Yes | Letters, digits, spaces, and hyphens allowed (e.g. `Anne-Marie`). Must not be blank. |
 | `p/PHONE` | Yes | Digits only, at least 3 digits long. |
 | `e/EMAIL` | Yes | Must follow the format `localpart@domain` (e.g. `alex@email.com`). |
 | `a/ADDRESS` | No | Any text. Can be added later using `edit`. |
@@ -788,7 +788,7 @@ Want to use PingBook on a different computer and bring your contacts with you? H
 
 ##### Q: I ran a command but the contact list did not change. What do I do?
 
-Look at the **result display** panel just below the command box. It always shows what happened, including a specific error message if something went wrong. Common issues are a missing required field, or using an index number that is larger than the number of contacts currently shown.
+Look at the **result display** panel just below the command box. It always shows what happened, including a specific error message if something went wrong. Common issues are a missing required field (the error message will name which field is missing), or using an index number that is larger than the number of contacts currently shown.
 
 ##### Q: I added a contact but they don't appear in the list. Why?
 
