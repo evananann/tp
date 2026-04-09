@@ -147,9 +147,9 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         String genericMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
-        // missing name prefix — name text appears before first recognized prefix, causing non-empty preamble
+        // missing name prefix — n/ absent; prefix check fires before preamble check
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                genericMessage);
+                String.format(MESSAGE_MISSING_FIELDS, "n/") + "\n" + genericMessage);
 
         // missing phone prefix — shows which field is absent
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -159,9 +159,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
                 String.format(MESSAGE_MISSING_FIELDS, "e/") + "\n" + genericMessage);
 
-        // all prefixes missing — entire input is preamble
+        // missing both name and phone prefix — lists all absent required fields
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
+                String.format(MESSAGE_MISSING_FIELDS, "n/, p/") + "\n" + genericMessage);
+
+        // all prefixes missing — all three required fields absent
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                genericMessage);
+                String.format(MESSAGE_MISSING_FIELDS, "n/, p/, e/") + "\n" + genericMessage);
     }
 
     @Test
