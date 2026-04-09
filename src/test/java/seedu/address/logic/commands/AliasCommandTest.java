@@ -73,7 +73,7 @@ public class AliasCommandTest {
     }
 
     @Test
-    public void execute_addAlias_duplicateAlias_throwsCommandException() throws Exception {
+    public void execute_addAliasDuplicate_throwsCommandException() throws Exception {
         AliasCommand cmd = new AliasCommand("add", "lc", "list");
         cmd.execute(model);
         AliasCommand duplicate = new AliasCommand("add", "lc", "find");
@@ -88,7 +88,7 @@ public class AliasCommandTest {
     }
 
     @Test
-    public void execute_removeAlias_fail_correctMessage() {
+    public void execute_removeAliasFail_correctMessage() {
         AliasCommand removeCmd = new AliasCommand("remove", "notfound", null);
         CommandException exception = assertThrows(CommandException.class, () -> removeCmd.execute(model));
         assertEquals(String.format(AliasCommand.MESSAGE_REMOVE_FAIL, "notfound"), exception.getMessage());
