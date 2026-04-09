@@ -9,7 +9,7 @@ Hi there! Whether you are brand new to command-line tools or already comfortable
 
 **PingBook** is a desktop app for managing contacts. You type short text commands to add, search, and organise people in your phone book. Once you get the hang of it, typing is actually much faster than hunting around with a mouse.
 
-As a CS student, your network grows fast — project teammates, lab partners, teaching assistants, professors, and internship contacts all pile up. PingBook is built for exactly that: quickly add a new teammate when a group project starts, tag your tutors and TAs so you can filter them in one step, star the recruiter you are actively emailing, and archive old contacts at the end of each semester so your active list stays clean.
+As a CS student, your network grows fast: project teammates, lab partners, teaching assistants, professors, and internship contacts all pile up. PingBook is built for exactly that: quickly adding a new teammate when a group project starts, tagging your tutors and TAs so you can filter them in one step, starring the recruiter you are actively emailing, and archiving old contacts at the end of each semester so your active list stays clean.
 
 Don't worry if some of this feels unfamiliar at first. Every technical term is explained the first time it appears, and each step is broken down so you can follow along without guessing.
 
@@ -117,11 +117,11 @@ Before diving in, here are the technical terms you will encounter in this guide.
 
 ##### Java
 
-> A programming language and platform that PingBook is built on. Your computer needs Java installed for PingBook to work, just as you need a PDF reader to open a PDF. We need **Java 17** specifically.
+> A programming language and platform that PingBook is built on. Your computer needs Java installed for PingBook to work, just as you need a PDF reader to open a PDF. You need **Java 17** specifically.
 
 ##### JDK (Java Development Kit)
 
-> The full package that installs Java on your computer. When this guide says "install Java 17," it means install the JDK version 17.
+> The full package that installs Java on your computer. When this guide says "install Java 17," it means installing the JDK version 17.
 
 ##### Command
 
@@ -284,7 +284,7 @@ Your new folder's path will be: `~/PingBook`
 
 ### Step 4: Navigate to your folder
 
-Now you need to tell your terminal to "go to" the folder where `pingbook.jar` lives. You do this with the `cd` command (short for **c**hange **d**irectory, which means change which folder you're in).
+Now you need to tell your terminal to "go to" the folder where `pingbook.jar` lives. You do this with the `cd` command (short for **c**hange **d**irectory, which means changing which folder you're in).
 
 ##### On Windows
 
@@ -907,7 +907,7 @@ Closes PingBook. Your data is saved automatically before the app closes, so you 
 
 ### How your data is saved
 
-PingBook saves your contacts automatically after every command that changes anything. You never need to press a "Save" button.
+PingBook saves your contacts automatically once any data changes. You never need to press a "Save" button.
 
 ##### Where your data lives: `data/pingbook.json`, located inside the same folder as `pingbook.jar`.
 
